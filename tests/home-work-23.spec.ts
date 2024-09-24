@@ -327,6 +327,23 @@ test.describe("Registration: Register Button", () => {
     await page.locator(".modal-title");
   });
 
+  test("Successful registration", async ({ page }) => {
+    await page.locator("#signupName").fill("Anna");
+    await page.locator("#signupLastName").fill("Komrakova");
+    await page.locator("#signupEmail").fill("aqa-komrakova.anna+7@gmail.com");
+    await page.locator("#signupPassword").fill("GmmWseR6**");
+    await page.locator("#signupRepeatPassword").fill("GmmWseR6**");
+    await expect(
+      page.locator(".btn-primary", { hasText: "Register" })
+    ).toBeEnabled();
+    await page.locator(".btn-primary", { hasText: "Register" }).click();
+    await page.locator("h1", { hasText: "Garage" });
+    await page.locator(".sidebar_btn").getByText("Settings").click();
+    await page.getByText("Remove my account").click();
+    await page.locator(".modal-header", { hasText: "Remove account" });
+    await page.getByText("Remove", { exact: true }).click();
+  });
+
   test("Registration button is active when all fields are filled in", async ({
     page,
   }) => {
@@ -339,14 +356,14 @@ test.describe("Registration: Register Button", () => {
       page.locator(".btn-primary", { hasText: "Register" })
     ).toBeEnabled();
   });
-  test("Registration button is active when all fields are empty", async ({
+  test("Registration button is disabled when all fields are empty", async ({
     page,
   }) => {
     await expect(
       page.locator(".btn-primary", { hasText: "Register" })
     ).toBeDisabled();
   });
-  test("Registration button is active when any field is empty", async ({
+  test("Registration button is disabled when any field is empty", async ({
     page,
   }) => {
     await page.locator("#signupName").fill("Anna");
@@ -357,7 +374,7 @@ test.describe("Registration: Register Button", () => {
       page.locator(".btn-primary", { hasText: "Register" })
     ).toBeDisabled();
   });
-  test("Registration button is active when data in any field is invalid", async ({
+  test("Registration button is disabled when data in any field is invalid", async ({
     page,
   }) => {
     await page.locator("#signupName").fill("A");
