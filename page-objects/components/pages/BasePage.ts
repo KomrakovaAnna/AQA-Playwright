@@ -1,10 +1,12 @@
-class BasePage {
-  constructor(page, url) {
-    this._page = baseURL;
-    this._url = url;
-  }
+import { Page } from "@playwright/test";
 
-  async open() {
-    await this._page.goto(this._url);
+export class BasePage {
+  private page: Page;
+
+  constructor(page: Page) {
+    this.page = page;
+  }
+  async open(baseURL: string) {
+    await this.page.goto(baseURL);
   }
 }
