@@ -6,6 +6,7 @@ export class HomePage extends BasePage {
   readonly signInBtn: Locator;
   readonly signUpBtn: Locator;
   readonly pageURL: string;
+  readonly form: Locator;
 
   constructor(page: Page) {
     super(page);

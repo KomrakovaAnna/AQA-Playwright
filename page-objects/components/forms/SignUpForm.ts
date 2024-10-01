@@ -1,5 +1,6 @@
-import { Locator, Page } from "@playwright/test";
+import { Locator, Page, expect } from "@playwright/test";
 import { BasePage } from "../pages/BasePage";
+import generateEmail from "../../../utils/emailGenerator";
 
 export class SignUpForm extends BasePage {
   readonly nameField: Locator;
@@ -9,7 +10,7 @@ export class SignUpForm extends BasePage {
   readonly reEnterPasswordField: Locator;
   readonly registerBtn: Locator;
   readonly errorMessage: Locator;
-  readonly logInErrorMessage: Locator;
+  readonly registerErrorMessage: Locator;
   readonly form: Locator;
   readonly formTitle: Locator;
 
@@ -26,12 +27,11 @@ export class SignUpForm extends BasePage {
     this.reEnterPasswordField = page.locator("#signupRepeatPassword");
     this.registerBtn = this.form.locator(".btn-primary");
 
-    this.errorMessage = page.locator(".invalid-feedback");
-    this.logInErrorMessage = page.locator(".alert-danger");
+    this.errorMessage = this.form.locator(".invalid-feedback");
+
+    this.registerErrorMessage = page.locator(".alert-danger");
   }
-  async getName() {
-    return await this.nameField;
-  }
+
   async checkSignUpFormIsOpen() {
     await this.formTitle.isVisible();
   }
@@ -57,23 +57,25 @@ export class SignUpForm extends BasePage {
     await this.reEnterPasswordField.blur();
   }
   async clickRegisterBtn() {
-    this.registerBtn.click();
+    await this.registerBtn.click();
   }
-  async successfulRegistration(
+  async registerANewUser(
     nameValue: string,
     lastNameValue: string,
-    emailFieldValue: string,
     passwordValue: string,
     reEnterPasswordValue: string
   ) {
     await this.nameField.fill(nameValue);
     await this.lastNameField.fill(lastNameValue);
-    await this.emailField.fill(emailFieldValue);
+    await this.emailField.fill(generateEmail());
     await this.passwordField.fill(passwordValue);
     await this.reEnterPasswordField.fill(reEnterPasswordValue);
-    await this.registerBtn.click;
+    await this.registerBtn.click();
+    
   }
-  async checkErrorMessageOnInvalidField() {
-    return await this.errorMessage;
+  async checkErrorMessage(text: string) {
+    await expect(
+      this.errorMessage.getByText(text, { exact: true })
+    ).toBeVisible();
   }
 }
