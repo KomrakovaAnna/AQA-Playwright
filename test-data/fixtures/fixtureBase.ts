@@ -20,6 +20,5 @@ export const test = base.extend<MyFixtures>({
     await page.locator(".icon-edit").first().click();
     await page.locator(".btn-outline-danger").click();
     await page.locator(".btn-danger").click();
-    await page.locator(".btn-danger").click();
   },
 });
