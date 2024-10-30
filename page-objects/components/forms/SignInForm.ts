@@ -1,5 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 import { BasePage } from "../pages/BasePage";
+import { GaragePage } from "../pages/GaragePage";
 
 export class SignInForm extends BasePage {
   readonly emailField: Locator;
@@ -20,5 +21,10 @@ export class SignInForm extends BasePage {
 
     this.errorMessage = page.locator(".invalid-feedback");
     this.logInErrorMessage = page.locator(".alert-danger");
+  }
+  async loginWithCredentials(emailValue: string, passwordValue: string) {
+    await this.emailField.fill(emailValue);
+    await this.passwordField.fill(passwordValue);
+    await this.loginBtn.click();
   }
 }
