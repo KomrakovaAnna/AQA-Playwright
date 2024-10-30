@@ -13,7 +13,6 @@ test.describe("Setup", () => {
     homePage = new HomePage(page);
     signInForm = new SignInForm(page);
     garagePage = new GaragePage(page);
-
     // await page.goto("");
     // await homePage.openSignInForm();
   });
