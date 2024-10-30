@@ -11,6 +11,9 @@ export class GaragePage extends BasePage {
   readonly pageHeading: Locator;
   readonly lastCarName: Locator;
 
+  readonly profile: Locator;
+  readonly profileName: Locator;
+
   constructor(page: Page) {
     super(page);
     this.pageURL = "/panel/garage";
@@ -23,6 +26,9 @@ export class GaragePage extends BasePage {
       hasText: "Garage",
     });
     this.lastCarName = page.locator(".car_name").first();
+
+    this.profile = page.locator(".-profile");
+    this.profileName = page.locator(".profile_name");
   }
 
   async open() {
