@@ -61,11 +61,11 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
       testMatch: "*home-work-28/*.ts",
     },
-    {
-      name: "api-firefox",
-      use: { ...devices["Desktop Firefox"] },
-      testMatch: "*home-work-28/*.ts",
-    },
+    // {
+    //   name: "api-firefox",
+    //   use: { ...devices["Desktop Firefox"] },
+    //   testMatch: "*home-work-28/*.ts",
+    // },
 
     // {
     //   name: "firefox",
