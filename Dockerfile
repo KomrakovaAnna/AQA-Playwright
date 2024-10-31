@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright:v1.48.2-jammy
+FROM mcr.microsoft.com/playwright:v1.47.1-jammy
 # FROM mcr.microsoft.com/playwright:v1.46.0-noble
 
 WORKDIR /pw-tests
