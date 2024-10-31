@@ -26,10 +26,10 @@ export default defineConfig({
   reporter: "html",
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    baseURL: process.env.BASE_URL,
+    baseURL: process.env.BASE_URL || "https://qauto.forstudy.space",
     httpCredentials: {
-      username: process.env.HTTP_CREDENTIALS_USERNAME || "",
-      password: process.env.HTTP_CREDENTIALS_PASSWORD || "",
+      username: process.env.HTTP_CREDENTIALS_USERNAME || "guest",
+      password: process.env.HTTP_CREDENTIALS_PASSWORD || "welcome2qauto",
     },
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
@@ -61,11 +61,11 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
       testMatch: "*home-work-28/*.ts",
     },
-    {
-      name: "api-firefox",
-      use: { ...devices["Desktop Firefox"] },
-      testMatch: "*home-work-28/*.ts",
-    },
+    // {
+    //   name: "api-firefox",
+    //   use: { ...devices["Desktop Firefox"] },
+    //   testMatch: "*home-work-28/*.ts",
+    // },
 
     // {
     //   name: "firefox",

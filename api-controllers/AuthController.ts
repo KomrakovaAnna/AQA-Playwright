@@ -1,8 +1,12 @@
+import { APIRequestContext } from "@playwright/test";
+
 class AuthController {
   private request;
-  constructor(request) {
+
+  constructor(request: APIRequestContext) {
     this.request = request;
   }
+
   async signInAndGetCookies(email: string, password: string) {
     let sid: string = "";
     const authRequest = await this.request.post("/api/auth/signin", {
@@ -12,6 +16,7 @@ class AuthController {
         remember: false,
       },
     });
+
     const cookies = authRequest.headers()["set-cookie"];
     if (cookies) {
       const cookieArray = cookies.split("\n");
